@@ -1,7 +1,7 @@
 import json
 from difflib import get_close_matches
 
-data = json.load(open("data.json"))
+data = json.load(open("exercise1/data.json"))
 
 
 def translate(w):
@@ -9,8 +9,10 @@ def translate(w):
 
     if new_word in data:
         return data[new_word]
-    elif len(get_close_matches(w, data.keys())) > 0:
-        yn = input("Did you mean %s instead? Enter Y if yes, or N if no: " % get_close_matches(w, data.keys())[0])
+    elif new_word.title() in data:
+        return data[new_word.title()]
+    elif len(get_close_matches(new_word, data.keys())) > 0:
+        yn = input("Did you mean %s instead? Enter Y if yes, or N if no: " % get_close_matches(new_word, data.keys())[0])
         if yn == "Y":
             return data[get_close_matches(w, data.keys())[0]]
         elif yn == "N":
